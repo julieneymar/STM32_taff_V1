@@ -1,0 +1,3 @@
+../Core/Src/key.c:23:16:Key1_is_Press	8	static
+../Core/Src/key.c:33:9:Key1_Long_Press	16	static
+../Core/Src/key.c:52:9:Key1_State	16	static

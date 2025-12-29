@@ -1,0 +1,4 @@
+../Core/Src/filtrer.c:18:7:Kalman_Filter_x	40	static
+../Core/Src/filtrer.c:71:7:Complementary_Filter_x	32	static
+../Core/Src/filtrer.c:84:7:Kalman_Filter_y	40	static
+../Core/Src/filtrer.c:135:7:Complementary_Filter_y	32	static
