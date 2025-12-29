@@ -292,7 +292,7 @@ u8 IICreadBytes(u8 dev, u8 reg, u8 length, u8 *data){
 		 if(count!=length-1)   data[count]=IIC_Read_Byte(1);  // Read data with ACK
 		 else                  data[count]=IIC_Read_Byte(0);  // Last byte NACK
 	}
-    IIC_Stop();//产生一个停止条件 Generates a stop condition
+    IIC_Stop();// Generates a stop condition
     return count;
 }
 /**************************************************************************

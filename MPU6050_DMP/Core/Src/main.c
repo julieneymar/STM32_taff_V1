@@ -42,8 +42,6 @@ u8 Stop_Flag = 1;
 
 extern volatile uint8_t Start_Flag;
 uint8_t mpu_data_ready = 0;
-//int Encoder_Left, Encoder_Right;
-//int Balance_Pwm, Velocity_Pwm, Turn_Pwm;
 uint8_t ccd_conut = 0;
 
 /* USER CODE END PTD */
@@ -136,6 +134,7 @@ int main(void)
    Encoder_Init_TIM3();
    Encoder_Init_TIM4();
 
+
    printf("\r\n========================================\r\n");
    printf("  ROBOT AUTO-ÉQUILIBRANT v1.0\r\n");
    printf("========================================\r\n");
@@ -147,53 +146,18 @@ int main(void)
    printf("========================================\r\n\r\n");
 
    HAL_Delay(500);
-
    // Test GPIO I2C
-   printf("[1/6] Testing I2C GPIO...\r\n");
-   for(int i = 0; i < 3; i++) {
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10 | GPIO_PIN_11, GPIO_PIN_RESET);
-       HAL_Delay(50);
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10 | GPIO_PIN_11, GPIO_PIN_SET);
-       HAL_Delay(50);
-   }
-   printf("      ✓ GPIO OK\r\n\r\n");
+     printf("[1/6] Testing I2C GPIO...\r\n");
+    IIC_Start();
+    IIC_Stop();
 
-   // Scanner I2C
-   printf("[2/6] Scanning I2C bus...\r\n");
-   u8 devices_found = 0;
-   for(u8 addr = 0x01; addr <= 0x7F; addr++) {
-       if(IIC_Start()) {
-           IIC_Send_Byte(addr << 1);
-           if(IIC_Wait_Ack()) {
-               printf("      Device found at 0x%02X\r\n", addr);
-               devices_found++;
-           }
-           IIC_Stop();
-       }
-       HAL_Delay(1);
-   }
-   printf("      ✓ Found %d device(s)\r\n\r\n", devices_found);
-
-   if(devices_found == 0) {
-       printf("✗ ERROR: No I2C devices!\r\n");
-       printf("Check wiring and restart.\r\n");
-       while(1) { HAL_Delay(1000); }
-   }
+    HAL_Delay(1);
 
    // Initialisation MPU6050
    printf("[3/6] Initializing MPU6050...\r\n");
    HAL_Delay(300);
    MPU6050_initialize();
    HAL_Delay(200);
-
-   u8 whoami = I2C_ReadOneByte(0x68 << 1, 0x75);
-   printf("      WHO_AM_I: 0x%02X ", whoami);
-   if(whoami == 0x68) {
-       printf("✓\r\n\r\n");
-   } else {
-       printf("✗ ERROR: MPU6050 not responding!\r\n");
-       while(1) { HAL_Delay(1000); }
-   }
 
    // Initialisation DMP
    printf("[4/6] Initializing DMP...\r\n");
@@ -205,24 +169,9 @@ int main(void)
    printf("[5/6] Configuring interrupt...\r\n");
    MPU6050_EXTI_Init();
    HAL_Delay(100);
-/*
-   // Calibration
-   printf("[6/6] Calibrating...\r\n");
-   printf("      Place robot UPRIGHT, wait 2s...\r\n");
-   HAL_Delay(2000);
 
-   float sum = 0;
-   for(int i = 0; i < 20; i++) {
-       Read_DMP();
-       sum += Pitch;
-       HAL_Delay(50);
-   }
-   Mid_Angle = sum / 20.0f;
-   printf("      Mid_Angle: %.d°\r\n", Mid_Angle);
-   printf("      ✓ Calibration done\r\n\r\n");
-*/
    printf("[6/6] Calibration...\r\n");
-   Mid_Angle = 1;  // ← Votre valeur mesurée
+   Mid_Angle = 1;
    printf("      Mid_Angle: %.d° (fixed)\r\n", Mid_Angle);
    printf("      ✓ Calibration skipped\r\n\r\n");
    // Configuration finale
@@ -247,21 +196,18 @@ int main(void)
      while(Key1_State(0) == BOUTTON_RELEASE )
      {
          // On fait clignoter une LED pour montrer que le système n'est pas planté
-         HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_11);
+         HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
          HAL_Delay(100);
      }
 
      // Une fois sorti de la boucle (bouton pressé)
      printf(">>> STARTING CONTROL LOOP <<<\r\n");
      Stop_Flag = 0;
-     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET); // LED fixe = ON
+     HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET); // LED fixe = ON
 
   while (1)
   {
     /* USER CODE END WHILE */
-
-
-
 
     /* USER CODE BEGIN 3 */
   }
@@ -568,7 +514,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, MPU6050_SDA_Pin|MPU6050_SCL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, MPU6050_SDA_Pin|MPU6050_SCL_Pin|LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : MPU6050_SDA_Pin MPU6050_SCL_Pin */
   GPIO_InitStruct.Pin = MPU6050_SDA_Pin|MPU6050_SCL_Pin;
@@ -588,6 +534,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(MPU6050_Int_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : LED_Pin */
+  GPIO_InitStruct.Pin = LED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 2, 0);

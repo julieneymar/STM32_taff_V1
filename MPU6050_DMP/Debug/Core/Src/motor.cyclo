@@ -2,5 +2,5 @@
 ../Core/Src/motor.c:29:6:Set_Pwm	5
 ../Core/Src/motor.c:74:5:PWM_Limit	3
 ../Core/Src/motor.c:88:6:Get_Velocity_Form_Encoder	1
-../Core/Src/motor.c:122:9:Turn_Off	3
-../Core/Src/motor.c:134:6:Motor_start	1
+../Core/Src/motor.c:106:9:Turn_Off	3
+../Core/Src/motor.c:118:6:Motor_start	1

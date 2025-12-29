@@ -7,6 +7,7 @@
 "./Core/Src/filtrer.o"
 "./Core/Src/inv_mpu.o"
 "./Core/Src/key.o"
+"./Core/Src/led.o"
 "./Core/Src/main.o"
 "./Core/Src/motor.o"
 "./Core/Src/mpu6050.o"

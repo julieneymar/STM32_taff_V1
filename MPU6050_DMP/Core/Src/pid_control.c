@@ -18,7 +18,7 @@ float Turn_K = 1.0; //1.0
 
 //Vertical loop PD control parameters
 float Balance_Kp = 10000;// 3500                 10000
-float Balance_Kd = 40; // 1.2                  40
+float Balance_Kd = 30; // 1.2                  40
 
 //PI control parameters for speed loop
 float Velocity_Kp=5000; // Range 0-72 6000    40   5000

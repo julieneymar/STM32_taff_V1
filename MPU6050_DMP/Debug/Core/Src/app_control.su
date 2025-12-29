@@ -1,5 +1,5 @@
 ../Core/Src/app_control.c:19:6:HAL_GPIO_EXTI_Callback	48	static
 ../Core/Src/app_control.c:76:6:Get_Angle	64	static
-../Core/Src/app_control.c:159:6:Read_MPU6050_Burst	56	static
-../Core/Src/app_control.c:202:5:Pick_Up	32	static
-../Core/Src/app_control.c:237:5:Put_Down	24	static
+../Core/Src/app_control.c:125:6:Read_MPU6050_Burst	56	static
+../Core/Src/app_control.c:168:5:Pick_Up	32	static
+../Core/Src/app_control.c:203:5:Put_Down	24	static
