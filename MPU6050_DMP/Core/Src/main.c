@@ -191,7 +191,6 @@ int main(void)
    if(whoami == 0x68) {
        printf("✓\r\n\r\n");
    } else {
-       printf("✗\r\n");
        printf("✗ ERROR: MPU6050 not responding!\r\n");
        while(1) { HAL_Delay(1000); }
    }

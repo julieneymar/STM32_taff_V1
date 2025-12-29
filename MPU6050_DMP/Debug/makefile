@@ -64,8 +64,8 @@ all: main-build
 main-build: MPU6050_DMP.elf secondary-outputs
 
 # Tool invocations
-MPU6050_DMP.elf MPU6050_DMP.map: $(OBJS) $(USER_OBJS) C:\Users\julie\STM32CubeIDE\workspace_1.19.0\MPU6050_DMP\STM32F103RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "MPU6050_DMP.elf" @"objects.list" $(USER_OBJS) -Wl,--start-group $(LIBS) -Wl,--end-group -mcpu=cortex-m3 -T"C:\Users\julie\STM32CubeIDE\workspace_1.19.0\MPU6050_DMP\STM32F103RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MPU6050_DMP.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+MPU6050_DMP.elf MPU6050_DMP.map: $(OBJS) $(USER_OBJS) C:\Users\julie\git\STM32_taff_V1\MPU6050_DMP\STM32F103RCTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "MPU6050_DMP.elf" @"objects.list" $(USER_OBJS) -Wl,--start-group $(LIBS) -Wl,--end-group -mcpu=cortex-m3 -T"C:\Users\julie\git\STM32_taff_V1\MPU6050_DMP\STM32F103RCTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MPU6050_DMP.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
