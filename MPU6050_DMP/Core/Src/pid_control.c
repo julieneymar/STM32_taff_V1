@@ -18,14 +18,14 @@ float Turn_K = 1.0; //1.0
 
 //Vertical loop PD control parameters
 float Balance_Kp = 10000;// 3500                 10000
-float Balance_Kd = 30; // 1.2                  40
+float Balance_Kd = 35; // 1.2                  40
 
 //PI control parameters for speed loop
 float Velocity_Kp=5000; // Range 0-72 6000    40   5000
 float Velocity_Ki=30;  //kp/200  30       2        30
 
 //Steering ring PD control parameters
-float Turn_Kp=1400; // 200                       1400
+float Turn_Kp=2000; // 200                       1400
 float Turn_Kd=30; // 5                           30
 
 //Forward speed
@@ -70,6 +70,8 @@ int Velocity_PI(int encoder_left,int encoder_right)
 {
     static float velocity,Encoder_Least,Encoder_bias,Movement;
 	  static float Encoder_Integral;
+
+	    Movement = Car_Target_Velocity;  // ← ICI !
 		Encoder_Least =0-(encoder_left+encoder_right);
 		Encoder_bias *= 0.84;
 		Encoder_bias += Encoder_Least*0.16;

@@ -36,10 +36,6 @@ int Mid_Angle;                          						// Mechanical median
 float Move_X,Move_Z; //
 u8 Stop_Flag = 1;
 
-
-
-
-
 extern volatile uint8_t Start_Flag;
 uint8_t mpu_data_ready = 0;
 uint8_t ccd_conut = 0;
@@ -204,6 +200,8 @@ int main(void)
      printf(">>> STARTING CONTROL LOOP <<<\r\n");
      Stop_Flag = 0;
      HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET); // LED fixe = ON
+     Car_Target_Velocity = 6.0f;
+     printf(">>> Robot moving forward at velocity %.1f <<<\r\n", Car_Target_Velocity);
 
   while (1)
   {

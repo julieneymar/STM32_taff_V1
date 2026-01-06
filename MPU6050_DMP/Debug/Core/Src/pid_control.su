@@ -1,4 +1,4 @@
 ../Core/Src/pid_control.c:41:5:myabs	24	static
 ../Core/Src/pid_control.c:55:5:Balance_PD	40	static
 ../Core/Src/pid_control.c:69:5:Velocity_PI	24	static
-../Core/Src/pid_control.c:92:5:Turn_PD	32	static
+../Core/Src/pid_control.c:94:5:Turn_PD	32	static
