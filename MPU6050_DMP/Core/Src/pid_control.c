@@ -12,9 +12,9 @@
 #include "pid_control.h"
 
 
-float Balance_K = 2.0; //2.0
-float Velocity_K = 1.35;//1.35
-float Turn_K = 1.0; //1.0
+float Balance_K = 2.0; //
+float Velocity_K = 1.35;//
+float Turn_K = 1.0; //
 
 //Vertical loop PD control parameters
 float Balance_Kp = 10000;// 3500                 10000
@@ -31,7 +31,7 @@ float Turn_Kd=30; // 5                           30
 //Forward speed
 float Car_Target_Velocity=0; //0-10
 //Rotation speed
-float Car_Turn_Amplitude_speed=0; //0-60
+float Car_Turn_Amplitude_speed= 0; //0-60
 
 /**************************************************************************
 Function: Absolute value function
@@ -95,6 +95,8 @@ int Turn_PD(float gyro)
 {
 	 static float Turn_Target,turn_PWM;
 	 float Kp=Turn_Kp,Kd;
+
+	 Turn_Target = Car_Turn_Amplitude_speed;
 	 Kd=Turn_Kd;
      Kd=myTurn_Kd;
 

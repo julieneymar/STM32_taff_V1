@@ -55,10 +55,10 @@ int IIC_Start(void)
 	IIC_SDA=1;
 	if(!READ_SDA)return 0;
 	IIC_SCL=1;
-	delay_us(1);
+	delay_us(5);
  	IIC_SDA=0; //START:when CLK is high,DATA change form high to low
 	if(READ_SDA)return 0;
-	delay_us(1);
+	delay_us(5);
 	IIC_SCL=0;// Clamp the I2C bus and prepare to send or receive data
 	return 1;
 }
@@ -73,10 +73,10 @@ void IIC_Stop(void)
 	SDA_OUT();// sda line output
 	IIC_SCL=0;
 	IIC_SDA=0;//STOP:when CLK is high DATA change form low to high
- 	delay_us(1);
+ 	delay_us(5);
 	IIC_SCL=1;
 	IIC_SDA=1;// Send I2C bus end signal
-	delay_us(1);
+	delay_us(5);
 }
 
 /**************************************************************************
@@ -90,7 +90,7 @@ int IIC_Wait_Ack(void)
 	u8 ucErrTime=0;
 	SDA_IN();      //SDA is set as input
 	IIC_SDA=1;
-	delay_us(1);
+	delay_us(5);
 	IIC_SCL=1;
 	delay_us(1);
 	while(READ_SDA)
@@ -101,7 +101,7 @@ int IIC_Wait_Ack(void)
 			IIC_Stop();
 			return 0;
 		}
-	  delay_us(1);
+	  delay_us(5);
 	}
 	IIC_SCL=0;//0 Clock output 0
 	return 1;
@@ -117,9 +117,9 @@ void IIC_Ack(void)
 	IIC_SCL=0;
 	SDA_OUT();
 	IIC_SDA=0;
-	delay_us(1);
+	delay_us(5);
 	IIC_SCL=1;
-	delay_us(1);
+	delay_us(5);
 	IIC_SCL=0;
 }
 
@@ -133,9 +133,9 @@ void IIC_NAck(void)
 	IIC_SCL=0;
 	SDA_OUT();
 	IIC_SDA=1;
-	delay_us(1);
+	delay_us(5);
 	IIC_SCL=1;
-	delay_us(1);
+	delay_us(5);
 	IIC_SCL=0;
 }
 /**************************************************************************
@@ -152,11 +152,11 @@ void IIC_Send_Byte(u8 txd)
     {
 			IIC_SDA=(txd&0x80)>>7;
 			txd<<=1;
-			delay_us(1);
+			delay_us(5);
 			IIC_SCL=1;
-			delay_us(1);
+			delay_us(5);
 			IIC_SCL=0;
-			delay_us(1);
+			delay_us(5);
     }
 }
 
@@ -227,7 +227,7 @@ Output  : receive：Data read
 u8 IIC_Read_Byte(unsigned char ack)
 {
 	unsigned char i,receive=0;
-	SDA_IN();//SDA设置为输入 SDA is set as input
+	SDA_IN();//SDA is set as input
     for(i=0;i<8;i++ )
 	 {
 			IIC_SCL=0;
@@ -238,9 +238,9 @@ u8 IIC_Read_Byte(unsigned char ack)
 			delay_us(2);
     }
     if (ack)
-        IIC_Ack(); //发送ACK Send ACK
+        IIC_Ack(); // Send ACK
     else
-        IIC_NAck();//发送nACK  Send nACK
+        IIC_NAck();//  Send nACK
     return receive;
 }
 
@@ -254,17 +254,17 @@ unsigned char I2C_ReadOneByte(unsigned char I2C_Addr,unsigned char addr)
 	unsigned char res=0;
 
 	IIC_Start();
-	IIC_Send_Byte(I2C_Addr);	   //发送写命令 Send write command
+	IIC_Send_Byte(I2C_Addr);	   // Send write command
 	res++;
 	IIC_Wait_Ack();
-	IIC_Send_Byte(addr); res++;  //发送地址 Send Address
+	IIC_Send_Byte(addr); res++;  // Send Address
 	IIC_Wait_Ack();
-	//IIC_Stop();//产生一个停止条件 Generates a stop condition
+	//IIC_Stop();/ Generates a stop condition
 	IIC_Start();
-	IIC_Send_Byte(I2C_Addr+1); res++;          //进入接收模式 Entering receive mode
+	IIC_Send_Byte(I2C_Addr+1); res++;          // Entering receive mode
 	IIC_Wait_Ack();
 	res=IIC_Read_Byte(0);
-    IIC_Stop();//产生一个停止条件 Generates a stop condition
+    IIC_Stop();// Generates a stop condition
 
 	return res;
 }

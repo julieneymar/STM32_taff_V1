@@ -35,14 +35,14 @@
 #define GPIOF_IDR_Addr    (GPIOF_BASE+8) //0x40011A08
 #define GPIOG_IDR_Addr    (GPIOG_BASE+8) //0x40011E08
 
-#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n)  //输出 Output
-#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n)  //输入 Input
+#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n)  // Output
+#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n)  // Input
 
-#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n)  //输出 Output
-#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n)  //输入 Input
+#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n)  // Output
+#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n)  // Input
 
-#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n)  //输出 Output
-#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n)  //输入 Input
+#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n)  // Output
+#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n)  // Input
 
 #define I2C_SCL_PORT    GPIOB
 #define I2C_SCL_PIN     GPIO_PIN_11
@@ -83,17 +83,5 @@ uint8_t IICreadBytes(uint8_t dev, uint8_t reg, uint8_t length, uint8_t *data);
 int i2cWrite(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *data);
 int i2cRead(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *buf);
 
-// Fonctions inline
-static inline void set_IIC_SCL(uint8_t state) {
-    HAL_GPIO_WritePin(I2C_SCL_PORT, I2C_SCL_PIN, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
-}
-
-static inline void set_IIC_SDA(uint8_t state) {
-    HAL_GPIO_WritePin(I2C_SDA_PORT, I2C_SDA_PIN, state ? GPIO_PIN_SET : GPIO_PIN_RESET);
-}
-
-static inline uint8_t get_READ_SDA(void) {
-    return HAL_GPIO_ReadPin(I2C_SDA_PORT, I2C_SDA_PIN);
-}
 
 #endif /* INC_IOI2C_H_ */

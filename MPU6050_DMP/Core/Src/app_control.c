@@ -7,6 +7,7 @@
 
 #include "AllHeader.h"
 #include "app_control.h"
+extern UART_HandleTypeDef huart1;
 
 
 //static u16 intstop_time =0 ;
@@ -226,6 +227,79 @@ int Put_Down(float Angle,int encoder_left,int encoder_right)
 	return 0;
 }
 
+
+uint8_t received;
+void Serial_Controle(void){
+
+	if(HAL_UART_Receive(&huart1, &received, 1, 10) == HAL_OK) {
+	  switch(received) {
+
+		  case 'A': // devant
+			  Car_Target_Velocity = 6.0f;
+			  Car_Turn_Amplitude_speed = 0;
+			  printf(">>> avancer <<<\r\n");
+			  break;
+
+		  case 'Z': //arrire
+			  Car_Target_Velocity = -6.0f;
+			  Car_Turn_Amplitude_speed = 0;
+			  printf(">>> reculer <<<\r\n");
+			  break;
+
+		  case 'E': // gauche
+			  Car_Target_Velocity = 0;
+			  Car_Turn_Amplitude_speed = -6.0f;
+			  printf(">>>  gauche <<<\r\n");
+			  break;
+
+		  case 'R': // droite
+			  Car_Target_Velocity = 0;
+			  Car_Turn_Amplitude_speed = 6.0f;
+			  printf(">>> droite  <<<\r\n");
+			  break;
+
+		  case 'T':  // Avant-Gauche
+			  Car_Target_Velocity = 6.0f;
+			  Car_Turn_Amplitude_speed = -6.0f;
+			  printf(">>> avant-gauche <<<\r\n");
+			  break;
+
+		  case 'Q':  // Avant-Droite
+			  Car_Target_Velocity = 6.0f;
+			  Car_Turn_Amplitude_speed = 6.0f;
+			  printf(">>> avant-droite <<<\r\n");
+			  break;
+
+		  case 'S':  // Arrière-Gauche
+			  Car_Target_Velocity = -6.0f;
+			  Car_Turn_Amplitude_speed = -6.0f;
+			  printf(">>> arriere-gauche <<<\r\n");
+			  break;
+
+		  case 'D':  // Arrière-Droite
+			  Car_Target_Velocity = -6.0f;
+			  Car_Turn_Amplitude_speed = 6.0f;
+			  printf(">>> arriere-droite <<<\r\n");
+			  break;
+
+		  case 'F':  // Stop
+			  Car_Target_Velocity = 0;
+			  Car_Turn_Amplitude_speed = 0;
+			  printf(">>> STOP <<<\r\n");
+			  break;
+
+		  case 'I':  // Info
+			  printf("==== STATUS ====\r\n");
+			  printf("Velocity: %.1f\r\n", Car_Target_Velocity);
+			  printf("Turn: %.1f\r\n", Car_Turn_Amplitude_speed);
+			  printf("Angle: %.1f°\r\n", Angle_Balance);
+			  printf("================\r\n");
+			  break;
+	  }
+	}
+
+
+}
 
 
 

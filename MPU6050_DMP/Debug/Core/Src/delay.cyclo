@@ -1,8 +1,8 @@
 ../Core/Src/delay.c:14:19:HAL_InitTick	1
 ../Core/Src/delay.c:30:10:HAL_GetTick	1
-../Core/Src/delay.c:53:6:HAL_Delay	7
-../Core/Src/delay.c:86:10:DWT_CNT_GET	1
-../Core/Src/delay.c:92:6:HAL_Delay_us	5
-../Core/Src/delay.c:150:6:delay_init	1
-../Core/Src/delay.c:162:6:delay_us	1
-../Core/Src/delay.c:179:6:delay_ms	3
+../Core/Src/delay.c:46:6:HAL_Delay	7
+../Core/Src/delay.c:75:10:DWT_CNT_GET	1
+../Core/Src/delay.c:81:6:HAL_Delay_us	5
+../Core/Src/delay.c:113:6:delay_init	1
+../Core/Src/delay.c:123:6:delay_us	2
+../Core/Src/delay.c:132:6:delay_ms	3
