@@ -4,5 +4,5 @@
 ../Core/Src/delay.c:75:10:DWT_CNT_GET	4	static
 ../Core/Src/delay.c:81:6:HAL_Delay_us	32	static
 ../Core/Src/delay.c:113:6:delay_init	8	static
-../Core/Src/delay.c:123:6:delay_us	24	static
+../Core/Src/delay.c:123:6:delay_us	16	static
 ../Core/Src/delay.c:132:6:delay_ms	24	static

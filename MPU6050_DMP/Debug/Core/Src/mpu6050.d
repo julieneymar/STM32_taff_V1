@@ -20,9 +20,12 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
@@ -34,15 +37,22 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/AllHeader.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/motor.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/mpu6050.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/adc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/main.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/ultrasonic.h \
+ ../Core/Inc/iOI2C.h ../Core/Inc/AllHeader.h ../Core/Inc/oled.h \
+ ../Core/Inc/font_oled.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/dmpKey.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/dmpmap.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/inv_mpu.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/inv_mpu_dmp_motion_driver.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/IOI2C.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/KF.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/delay.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/filtrer.h
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/filtrer.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/uart5.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/ps2.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/app_ps2.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/oled.i2c.h
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/mpu6050.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/AllHeader.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -64,9 +74,12 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
@@ -78,12 +91,21 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/AllHeader.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/motor.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/mpu6050.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/adc.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/main.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/ultrasonic.h:
+../Core/Inc/iOI2C.h:
+../Core/Inc/AllHeader.h:
+../Core/Inc/oled.h:
+../Core/Inc/font_oled.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/dmpKey.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/dmpmap.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/inv_mpu.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/inv_mpu_dmp_motion_driver.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/IOI2C.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/KF.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/delay.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/filtrer.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/uart5.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/ps2.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/app_ps2.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/oled.i2c.h:

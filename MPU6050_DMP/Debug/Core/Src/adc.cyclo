@@ -1,0 +1,8 @@
+../Core/Src/adc.c:15:17:Battery_Get	2
+../Core/Src/adc.c:49:10:Battery_Get_Average	6
+../Core/Src/adc.c:91:7:Get_Measure_Voltage	1
+../Core/Src/adc.c:115:7:Get_Battery_Voltage	1
+../Core/Src/adc.c:136:6:Battery_ADC_Init_DMA	2
+../Core/Src/adc.c:146:6:HAL_ADC_ConvCpltCallback	1
+../Core/Src/adc.c:152:7:Get_Battery_Voltage_DMA	3
+../Core/Src/adc.c:174:6:adc	1

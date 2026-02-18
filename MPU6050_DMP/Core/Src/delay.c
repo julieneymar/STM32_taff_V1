@@ -118,14 +118,14 @@ void delay_init(void)
 	i_ms = i_us * 1000 ; 					   // Calculating millisecond factors
 }
 
-static uint32_t dwt_us_factor;
+//static uint32_t dwt_us_factor;
 
 void delay_us(u32 us)
 {
-	 uint32_t start = DWT->CYCCNT;
-	 uint32_t ticks = us * dwt_us_factor;
+	 //uint32_t start = DWT->CYCCNT;
+	 //uint32_t ticks = us * dwt_us_factor;
 
-	 while ((DWT->CYCCNT - start) < ticks);
+	// while ((DWT->CYCCNT - start) < ticks);
 
 }
 

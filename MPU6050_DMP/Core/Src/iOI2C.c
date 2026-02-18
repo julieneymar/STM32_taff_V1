@@ -6,7 +6,7 @@
  */
 
 
-#include "../../../../MPU6050_DMP/Core/Inc/IOI2C.h"
+#include <iOI2C.h>
 
 //---------------- Fonctions de configuration SDA----------------/
 
@@ -55,10 +55,10 @@ int IIC_Start(void)
 	IIC_SDA=1;
 	if(!READ_SDA)return 0;
 	IIC_SCL=1;
-	delay_us(5);
+	delay_us(1);
  	IIC_SDA=0; //START:when CLK is high,DATA change form high to low
 	if(READ_SDA)return 0;
-	delay_us(5);
+	delay_us(1);
 	IIC_SCL=0;// Clamp the I2C bus and prepare to send or receive data
 	return 1;
 }
@@ -73,10 +73,10 @@ void IIC_Stop(void)
 	SDA_OUT();// sda line output
 	IIC_SCL=0;
 	IIC_SDA=0;//STOP:when CLK is high DATA change form low to high
- 	delay_us(5);
+ 	delay_us(1);
 	IIC_SCL=1;
 	IIC_SDA=1;// Send I2C bus end signal
-	delay_us(5);
+	delay_us(1);
 }
 
 /**************************************************************************
@@ -90,7 +90,7 @@ int IIC_Wait_Ack(void)
 	u8 ucErrTime=0;
 	SDA_IN();      //SDA is set as input
 	IIC_SDA=1;
-	delay_us(5);
+	delay_us(1);
 	IIC_SCL=1;
 	delay_us(1);
 	while(READ_SDA)
@@ -101,7 +101,7 @@ int IIC_Wait_Ack(void)
 			IIC_Stop();
 			return 0;
 		}
-	  delay_us(5);
+	  delay_us(1);
 	}
 	IIC_SCL=0;//0 Clock output 0
 	return 1;
@@ -117,9 +117,9 @@ void IIC_Ack(void)
 	IIC_SCL=0;
 	SDA_OUT();
 	IIC_SDA=0;
-	delay_us(5);
+	delay_us(1);
 	IIC_SCL=1;
-	delay_us(5);
+	delay_us(1);
 	IIC_SCL=0;
 }
 
@@ -133,9 +133,9 @@ void IIC_NAck(void)
 	IIC_SCL=0;
 	SDA_OUT();
 	IIC_SDA=1;
-	delay_us(5);
+	delay_us(1);
 	IIC_SCL=1;
-	delay_us(5);
+	delay_us(1);
 	IIC_SCL=0;
 }
 /**************************************************************************
@@ -152,11 +152,11 @@ void IIC_Send_Byte(u8 txd)
     {
 			IIC_SDA=(txd&0x80)>>7;
 			txd<<=1;
-			delay_us(5);
+			delay_us(1);
 			IIC_SCL=1;
-			delay_us(5);
+			delay_us(1);
 			IIC_SCL=0;
-			delay_us(5);
+			delay_us(1);
     }
 }
 

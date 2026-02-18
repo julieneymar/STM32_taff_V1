@@ -20,8 +20,8 @@
 #define __HAL_MAX_DELAY  4294967295/(HAL_RCC_GetSysClockFreq()/1000)
 
 void delay_init(void);
-void delay_us(u32 us);
-void delay_ms(u16 ms);
+void delay_us(uint32_t us);
+void delay_ms(uint16_t ms);
 void HAL_Delay_us(uint32_t us);
 uint32_t DWT_CNT_GET(void);
 

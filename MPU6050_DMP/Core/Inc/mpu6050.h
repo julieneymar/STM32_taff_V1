@@ -280,7 +280,7 @@ void MPU6050_EXTI_Init(void);
 #define MPU6050_INTERRUPT_DMP_INT_BIT       1
 #define MPU6050_INTERRUPT_DATA_RDY_BIT      0
 
-// TODO: figure out what these actually do
+// figure out what these actually do
 // UMPL source code is not very obivous
 #define MPU6050_DMPINT_5_BIT            5
 #define MPU6050_DMPINT_4_BIT            4
@@ -369,15 +369,15 @@ extern	short gyro[3], accel[3];
 extern int16_t Gx_offset,Gy_offset,Gz_offset;
 extern float Acc1G_Values;
 extern float Roll,Pitch,Yaw;
-//���ⲿ���õ�API  API for external calls
-void MPU6050_initialize(void); //��ʼ�� initialization
-uint8_t MPU6050_testConnection(void); //���MPU6050�Ƿ���� Detect whether MPU6050 exists
-//��ȡADCֵ ��ȡADCֵ
+
+void MPU6050_initialize(void); // initialization
+uint8_t MPU6050_testConnection(void); //Detect whether MPU6050 exists
+
 void MPU6050_getMotion6(int16_t* ax, int16_t* ay, int16_t* az, int16_t* gx, int16_t* gy, int16_t* gz);
 void MPU6050_getlastMotion6(int16_t* ax, int16_t* ay,
 		int16_t* az, int16_t* gx, int16_t* gy, int16_t* gz);
-uint8_t MPU6050_getDeviceID(void); //��ȡMPU6050��ID Read the ID of MPU6050
-void MPU6050_InitGyro_Offset(void);//��ʼ��������ƫ�� Initialize gyroscope bias
+uint8_t MPU6050_getDeviceID(void); // Read the ID of MPU6050
+void MPU6050_InitGyro_Offset(void);// Initialize gyroscope bias
 void DMP_Init(void);
 void Read_DMP(void);
 int Read_Temperature(void);

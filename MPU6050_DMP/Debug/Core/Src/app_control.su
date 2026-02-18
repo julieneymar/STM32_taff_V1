@@ -1,6 +1,7 @@
-../Core/Src/app_control.c:20:6:HAL_GPIO_EXTI_Callback	48	static
-../Core/Src/app_control.c:77:6:Get_Angle	64	static
-../Core/Src/app_control.c:126:6:Read_MPU6050_Burst	56	static
-../Core/Src/app_control.c:169:5:Pick_Up	32	static
-../Core/Src/app_control.c:204:5:Put_Down	24	static
-../Core/Src/app_control.c:232:6:Serial_Controle	8	static
+../Core/Src/app_control.c:21:6:HAL_GPIO_EXTI_Callback	48	static
+../Core/Src/app_control.c:84:6:Get_Angle	64	static
+../Core/Src/app_control.c:133:6:Read_MPU6050_Burst	56	static
+../Core/Src/app_control.c:176:5:Pick_Up	32	static
+../Core/Src/app_control.c:211:5:Put_Down	24	static
+../Core/Src/app_control.c:239:6:Serial_Controle	8	static
+../Core/Src/app_control.c:329:6:Ultrasonic	24	static

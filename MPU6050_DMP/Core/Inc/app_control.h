@@ -32,7 +32,7 @@ void Read_MPU6050_Burst(float *gyro_x, float *gyro_y, float *gyro_z,
                         float *accel_x, float *accel_y, float *accel_z);
 
 void Serial_Controle(void);
-
+void Ultrasonic(void);
 
 #endif
 

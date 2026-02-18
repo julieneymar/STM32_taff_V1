@@ -13,6 +13,7 @@ extern UART_HandleTypeDef huart1;
 //static u16 intstop_time =0 ;
 float battery = 12;// 12v The initial state is fully charged 12v
 uint8_t Start_Flag = 0; // Valeur initiale
+int ps2_conut = 0;  // Variable globale initialisée à 0
 
 
 extern uint8_t mpu_data_ready ;
@@ -21,6 +22,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if(GPIO_Pin == MPU6050_Int_Pin && Stop_Flag == 0)
     {
+    	ps2_conut++;
+    	if(ps2_conut >20){
+    		ps2_conut = 0;
+    		PS2_Control_Car();
+
+    	}
 
 	// 1️⃣ Lire l'angle et le gyro
 		Get_Angle(GET_Angle_Way);
@@ -298,8 +305,105 @@ void Serial_Controle(void){
 	  }
 	}
 
+}
+
+/*
+void Ultrasonic(void){
+	Get_Distane();
+    float distance = g_distance;
+
+	 if(distance < 8) {
+		// ⚠ TROP PROCHE → RECULER + TOURNER
+		Car_Target_Velocity = -6.0f;  // Reculer
+		Car_Turn_Amplitude_speed = 6.0f;  // Tourner droite
+		printf("⚠️ OBSTACLE %.0fcm → BACK+TURN\r\n", distance);
+	} else {
+		Car_Target_Velocity = 6.0f;
+	    Car_Turn_Amplitude_speed = 0;
+	    printf(">>> avancer dis=%lf<<<\r\n",distance);
+	}
 
 }
+*/
+
+void Ultrasonic(void)
+{
+    static uint32_t last_trigger = 0;
+    static uint8_t waiting_for_measurement = 0;
+    static uint32_t last_valid_distance = 0;  // Garder dernière mesure valide
+
+    uint32_t now = HAL_GetTick();
+
+    // 1️⃣ Déclencher une nouvelle mesure toutes les 100ms
+    if (!waiting_for_measurement && (now - last_trigger) > 100)
+    {
+        // Reset et déclencher
+        TIM2CH2_CAPTURE_STA = 0;
+        TIM2CH2_CAPTURE_VAL = 0;
+
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+        delay_us(15);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
+
+        last_trigger = now;
+        waiting_for_measurement = 1;
+    }
+
+    // 2️⃣ Vérifier si mesure terminée (sans bloquer)
+    if (waiting_for_measurement)
+    {
+        // Timeout après 60ms
+        if ((now - last_trigger) > 60)
+        {
+            waiting_for_measurement = 0;
+            // Garder l'ancienne valeur en cas de timeout
+        }
+        // Mesure prête
+        else if (TIM2CH2_CAPTURE_STA & 0x80)
+        {
+            uint32_t capture_time = (TIM2CH2_CAPTURE_STA & 0x3F) * 65536 + TIM2CH2_CAPTURE_VAL;
+            uint32_t distance_mm = (capture_time * 170) / 1000;
+
+            if (distance_mm > 0 && distance_mm < 4000)
+            {
+                last_valid_distance = distance_mm;  // Mettre à jour seulement si valide
+            }
+
+            waiting_for_measurement = 0;
+        }
+    }
+
+    // 3️⃣ Utiliser la dernière distance valide pour le contrôle
+    float distance_cm = last_valid_distance / 10.0f;
+
+    if (distance_cm > 0 && distance_cm < 15.0f)
+    {
+        // ⚠️ OBSTACLE PROCHE → Reculer + Tourner
+        Car_Target_Velocity = -4.0f;
+        Car_Turn_Amplitude_speed = 5.0f;
+
+        // Afficher seulement de temps en temps pour ne pas surcharger UART
+        static uint32_t last_print = 0;
+        if ((now - last_print) > 200)
+        {
+            printf("⚠️ OBSTACLE %.1fcm → ÉVITEMENT\r\n", distance_cm);
+            last_print = now;
+        }
+    }
+    else if (distance_cm >= 15.0f && distance_cm < 30.0f)
+    {
+        // Zone intermédiaire → Ralentir
+        Car_Target_Velocity = 2.0f;
+        Car_Turn_Amplitude_speed = 0;
+    }
+    else
+    {
+        // Voie libre → Avancer normalement
+        Car_Target_Velocity = 6.0f;
+        Car_Turn_Amplitude_speed = 0;
+    }
+}
+
 
 
 

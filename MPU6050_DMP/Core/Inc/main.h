@@ -63,6 +63,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define TRIG_Pin GPIO_PIN_0
+#define TRIG_GPIO_Port GPIOA
+#define ECHO_Pin GPIO_PIN_1
+#define ECHO_GPIO_Port GPIOA
 #define MPU6050_SDA_Pin GPIO_PIN_10
 #define MPU6050_SDA_GPIO_Port GPIOB
 #define MPU6050_SCL_Pin GPIO_PIN_11
@@ -74,6 +78,10 @@ void Error_Handler(void);
 #define MPU6050_Int_EXTI_IRQn EXTI15_10_IRQn
 #define LED_Pin GPIO_PIN_3
 #define LED_GPIO_Port GPIOB
+#define OLED_IIC_SCL_Pin GPIO_PIN_8
+#define OLED_IIC_SCL_GPIO_Port GPIOB
+#define OLED_IIC_SDA_Pin GPIO_PIN_9
+#define OLED_IIC_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

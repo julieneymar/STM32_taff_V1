@@ -1,0 +1,14 @@
+../Core/Src/ps2.c:42:6:PS2_Init	1
+../Core/Src/ps2.c:85:6:PS2_Cmd	4
+../Core/Src/ps2.c:115:4:PS2_RedLight	2
+../Core/Src/ps2.c:132:6:PS2_ReadData	4
+../Core/Src/ps2.c:165:4:PS2_DataKey	3
+../Core/Src/ps2.c:186:4:PS2_AnologData	1
+../Core/Src/ps2.c:192:6:PS2_ClearData	2
+../Core/Src/ps2.c:210:6:PS2_Vibration	1
+../Core/Src/ps2.c:234:6:PS2_ShortPoll	1
+../Core/Src/ps2.c:254:6:PS2_EnterConfing	1
+../Core/Src/ps2.c:278:6:PS2_TurnOnAnalogMode	1
+../Core/Src/ps2.c:302:6:PS2_VibrationMode	1
+../Core/Src/ps2.c:322:6:PS2_ExitConfing	1
+../Core/Src/ps2.c:346:6:PS2_SetInit	1
