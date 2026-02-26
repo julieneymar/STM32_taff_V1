@@ -1,2 +1,1 @@
-../Core/Src/app_LQR.c:68:6:LQR_Control	6
-../Core/Src/app_LQR.c:167:6:LQR_Balance_Only	2
+../Core/Src/app_LQR.c:67:6:LQR_Balance_Only	2

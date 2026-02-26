@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00015278  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00018414  00000000  00000000  000152a1  2**0
+ 12 .debug_info   000183a1  00000000  00000000  000152a1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00004669  00000000  00000000  0002d6b5  2**0
+ 13 .debug_abbrev 0000464e  00000000  00000000  0002d642  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001888  00000000  00000000  00031d20  2**3
+ 14 .debug_aranges 00001880  00000000  00000000  00031c90  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 000012eb  00000000  00000000  000335a8  2**0
+ 15 .debug_rnglists 000012e4  00000000  00000000  00033510  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  000235d3  00000000  00000000  00034893  2**0
+ 16 .debug_macro  000235d3  00000000  00000000  000347f4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00023630  00000000  00000000  00057e66  2**0
+ 17 .debug_line   000234bb  00000000  00000000  00057dc7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000ad462  00000000  00000000  0007b496  2**0
+ 18 .debug_str    000ad456  00000000  00000000  0007b282  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001288f8  2**0
+ 19 .comment      00000043  00000000  00000000  001286d8  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00007c3c  00000000  00000000  0012893c  2**2
+ 20 .debug_frame  00007c10  00000000  00000000  0012871c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000067  00000000  00000000  00130578  2**0
+ 21 .debug_line_str 00000067  00000000  00000000  0013032c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5420,9 +5420,9 @@ void mul(int A_row, int A_col, int B_row, int B_col, float A[][A_col], float B[]
  80030fc:	00000000 	.word	0x00000000
 
 08003100 <LQR_Balance_Only>:
-        Set_Pwm(0, 0);
-    }
-}
+
+
+
 
 void LQR_Balance_Only(void)
 {
@@ -5432,7 +5432,7 @@ void LQR_Balance_Only(void)
 	int Encoder_Left, Encoder_Right;
 	int Motor_Left, Motor_Right;
 
-	// 1️⃣ Lire angle et gyroscope
+	//  Lire angle et gyroscope
 	Get_Angle(GET_Angle_Way);
  8003106:	4bac      	ldr	r3, [pc, #688]	@ (80033b8 <LQR_Balance_Only+0x2b8>)
  8003108:	781b      	ldrb	r3, [r3, #0]
@@ -6114,7 +6114,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
  80036e2:	2b00      	cmp	r3, #0
  80036e4:	d101      	bne.n	80036ea <HAL_GPIO_EXTI_Callback+0x1e>
     {
-    	// LQR_Control();
     	 LQR_Balance_Only();
  80036e6:	f7ff fd0b 	bl	8003100 <LQR_Balance_Only>
 		}
