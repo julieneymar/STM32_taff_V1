@@ -249,11 +249,18 @@ int main(void)
 
   while (1)
   {
+	 // Get_Distane();
+	 // APP_avoid();// Obstacle avoidance
+
+
+	 // printf("dis = %ld mm \n", g_distance);
+	  //OLED_Draw_Line(showbuf, 2, false, true);
+	  //sprintf(showbuf,"dis = %ld mm  ",g_distance);
+	  HAL_Delay(15);
 
 
 
-	 // Ultrasonic();
-//	  HAL_Delay(100);  // 10 mesures par seconde
+
 
     /* USER CODE END WHILE */
 

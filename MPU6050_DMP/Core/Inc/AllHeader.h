@@ -52,6 +52,7 @@
 #include "ps2.h"
 #include "app_ps2.h"
 #include "oled.i2c.h"
+#include "app_LQR.h"
 
 
 

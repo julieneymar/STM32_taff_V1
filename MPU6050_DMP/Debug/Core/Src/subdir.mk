@@ -7,6 +7,7 @@
 C_SRCS += \
 ../Core/Src/KF.c \
 ../Core/Src/adc.c \
+../Core/Src/app_LQR.c \
 ../Core/Src/app_control.c \
 ../Core/Src/app_ps2.c \
 ../Core/Src/delay.c \
@@ -35,6 +36,7 @@ C_SRCS += \
 OBJS += \
 ./Core/Src/KF.o \
 ./Core/Src/adc.o \
+./Core/Src/app_LQR.o \
 ./Core/Src/app_control.o \
 ./Core/Src/app_ps2.o \
 ./Core/Src/delay.o \
@@ -63,6 +65,7 @@ OBJS += \
 C_DEPS += \
 ./Core/Src/KF.d \
 ./Core/Src/adc.d \
+./Core/Src/app_LQR.d \
 ./Core/Src/app_control.d \
 ./Core/Src/app_ps2.d \
 ./Core/Src/delay.d \
@@ -96,7 +99,7 @@ Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/KF.cyclo ./Core/Src/KF.d ./Core/Src/KF.o ./Core/Src/KF.su ./Core/Src/adc.cyclo ./Core/Src/adc.d ./Core/Src/adc.o ./Core/Src/adc.su ./Core/Src/app_control.cyclo ./Core/Src/app_control.d ./Core/Src/app_control.o ./Core/Src/app_control.su ./Core/Src/app_ps2.cyclo ./Core/Src/app_ps2.d ./Core/Src/app_ps2.o ./Core/Src/app_ps2.su ./Core/Src/delay.cyclo ./Core/Src/delay.d ./Core/Src/delay.o ./Core/Src/delay.su ./Core/Src/encoder.cyclo ./Core/Src/encoder.d ./Core/Src/encoder.o ./Core/Src/encoder.su ./Core/Src/filtrer.cyclo ./Core/Src/filtrer.d ./Core/Src/filtrer.o ./Core/Src/filtrer.su ./Core/Src/font_oled.cyclo ./Core/Src/font_oled.d ./Core/Src/font_oled.o ./Core/Src/font_oled.su ./Core/Src/iOI2C.cyclo ./Core/Src/iOI2C.d ./Core/Src/iOI2C.o ./Core/Src/iOI2C.su ./Core/Src/inv_mpu.cyclo ./Core/Src/inv_mpu.d ./Core/Src/inv_mpu.o ./Core/Src/inv_mpu.su ./Core/Src/key.cyclo ./Core/Src/key.d ./Core/Src/key.o ./Core/Src/key.su ./Core/Src/led.cyclo ./Core/Src/led.d ./Core/Src/led.o ./Core/Src/led.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/motor.cyclo ./Core/Src/motor.d ./Core/Src/motor.o ./Core/Src/motor.su ./Core/Src/mpu6050.cyclo ./Core/Src/mpu6050.d ./Core/Src/mpu6050.o ./Core/Src/mpu6050.su ./Core/Src/oled.cyclo ./Core/Src/oled.d ./Core/Src/oled.i2c.cyclo ./Core/Src/oled.i2c.d ./Core/Src/oled.i2c.o ./Core/Src/oled.i2c.su ./Core/Src/oled.o ./Core/Src/oled.su ./Core/Src/pid_control.cyclo ./Core/Src/pid_control.d ./Core/Src/pid_control.o ./Core/Src/pid_control.su ./Core/Src/ps2.cyclo ./Core/Src/ps2.d ./Core/Src/ps2.o ./Core/Src/ps2.su ./Core/Src/stm32f1xx_hal_msp.cyclo ./Core/Src/stm32f1xx_hal_msp.d ./Core/Src/stm32f1xx_hal_msp.o ./Core/Src/stm32f1xx_hal_msp.su ./Core/Src/stm32f1xx_it.cyclo ./Core/Src/stm32f1xx_it.d ./Core/Src/stm32f1xx_it.o ./Core/Src/stm32f1xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f1xx.cyclo ./Core/Src/system_stm32f1xx.d ./Core/Src/system_stm32f1xx.o ./Core/Src/system_stm32f1xx.su ./Core/Src/uart5.cyclo ./Core/Src/uart5.d ./Core/Src/uart5.o ./Core/Src/uart5.su ./Core/Src/ultrasonic.cyclo ./Core/Src/ultrasonic.d ./Core/Src/ultrasonic.o ./Core/Src/ultrasonic.su
+	-$(RM) ./Core/Src/KF.cyclo ./Core/Src/KF.d ./Core/Src/KF.o ./Core/Src/KF.su ./Core/Src/adc.cyclo ./Core/Src/adc.d ./Core/Src/adc.o ./Core/Src/adc.su ./Core/Src/app_LQR.cyclo ./Core/Src/app_LQR.d ./Core/Src/app_LQR.o ./Core/Src/app_LQR.su ./Core/Src/app_control.cyclo ./Core/Src/app_control.d ./Core/Src/app_control.o ./Core/Src/app_control.su ./Core/Src/app_ps2.cyclo ./Core/Src/app_ps2.d ./Core/Src/app_ps2.o ./Core/Src/app_ps2.su ./Core/Src/delay.cyclo ./Core/Src/delay.d ./Core/Src/delay.o ./Core/Src/delay.su ./Core/Src/encoder.cyclo ./Core/Src/encoder.d ./Core/Src/encoder.o ./Core/Src/encoder.su ./Core/Src/filtrer.cyclo ./Core/Src/filtrer.d ./Core/Src/filtrer.o ./Core/Src/filtrer.su ./Core/Src/font_oled.cyclo ./Core/Src/font_oled.d ./Core/Src/font_oled.o ./Core/Src/font_oled.su ./Core/Src/iOI2C.cyclo ./Core/Src/iOI2C.d ./Core/Src/iOI2C.o ./Core/Src/iOI2C.su ./Core/Src/inv_mpu.cyclo ./Core/Src/inv_mpu.d ./Core/Src/inv_mpu.o ./Core/Src/inv_mpu.su ./Core/Src/key.cyclo ./Core/Src/key.d ./Core/Src/key.o ./Core/Src/key.su ./Core/Src/led.cyclo ./Core/Src/led.d ./Core/Src/led.o ./Core/Src/led.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/motor.cyclo ./Core/Src/motor.d ./Core/Src/motor.o ./Core/Src/motor.su ./Core/Src/mpu6050.cyclo ./Core/Src/mpu6050.d ./Core/Src/mpu6050.o ./Core/Src/mpu6050.su ./Core/Src/oled.cyclo ./Core/Src/oled.d ./Core/Src/oled.i2c.cyclo ./Core/Src/oled.i2c.d ./Core/Src/oled.i2c.o ./Core/Src/oled.i2c.su ./Core/Src/oled.o ./Core/Src/oled.su ./Core/Src/pid_control.cyclo ./Core/Src/pid_control.d ./Core/Src/pid_control.o ./Core/Src/pid_control.su ./Core/Src/ps2.cyclo ./Core/Src/ps2.d ./Core/Src/ps2.o ./Core/Src/ps2.su ./Core/Src/stm32f1xx_hal_msp.cyclo ./Core/Src/stm32f1xx_hal_msp.d ./Core/Src/stm32f1xx_hal_msp.o ./Core/Src/stm32f1xx_hal_msp.su ./Core/Src/stm32f1xx_it.cyclo ./Core/Src/stm32f1xx_it.d ./Core/Src/stm32f1xx_it.o ./Core/Src/stm32f1xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f1xx.cyclo ./Core/Src/system_stm32f1xx.d ./Core/Src/system_stm32f1xx.o ./Core/Src/system_stm32f1xx.su ./Core/Src/uart5.cyclo ./Core/Src/uart5.d ./Core/Src/uart5.o ./Core/Src/uart5.su ./Core/Src/ultrasonic.cyclo ./Core/Src/ultrasonic.d ./Core/Src/ultrasonic.o ./Core/Src/ultrasonic.su
 
 .PHONY: clean-Core-2f-Src
 

@@ -35,24 +35,44 @@ void Ultrasonic_Init(void)
 
 void APP_avoid(void)
 {
-	if(g_distance<250)
+	if(g_distance<14)
 	{
-			Move_X = -10;
+		/*
+			Move_X = -6;
 			delay_us(1);
 
 			Move_X = 0;
-			Move_Z = 400;
-			delay_us(2);
+			Move_Z = 6;
+			delay_us(2); */
+		Car_Target_Velocity = -6.0f;   // Reculer
+	    Car_Turn_Amplitude_speed = 6.0f; // Tourner
 	}
 	else
 	{
-			Move_X = 15;
-			Move_Z = 0;
+			//Move_X = 6;
+			//Move_Z = 0;
+		 Car_Target_Velocity = 6.0f;    // Avancer
+		  Car_Turn_Amplitude_speed = 0;
 	}
 
 
 }
 
+void Get_Distane(void)
+{
+	 TRIG_SIG = 1;
+	 delay_us(15);
+	 TRIG_SIG = 0;
+	 if(TIM2CH2_CAPTURE_STA&0X80)//�ɹ�������һ�θߵ�ƽ //Successfully captured a high level once
+	 {
+		 g_distance=TIM2CH2_CAPTURE_STA&0X3F;
+		 g_distance*=65536;					        //���ʱ���ܺ� Overflow time sum
+		 g_distance+=TIM2CH2_CAPTURE_VAL;		//�õ��ܵĸߵ�ƽʱ�� Get the total high level time
+		 g_distance=g_distance*170/1000;      //ʱ��*����/2�����أ� һ������0.001ms  Time * speed of sound/2 (round trip), one count 0.001ms
+		 TIM2CH2_CAPTURE_STA=0;			//������һ�β��� Start the next capture
+	 }
+}
+/*
 void Get_Distane(void)
 {
     // Reset des flags avant la mesure
@@ -87,6 +107,7 @@ void Get_Distane(void)
         g_distance = 0;
     }
 }
+*/
 
 /**
  * @brief Callback interruption débordement

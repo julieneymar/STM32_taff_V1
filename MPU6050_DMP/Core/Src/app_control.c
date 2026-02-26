@@ -13,7 +13,7 @@ extern UART_HandleTypeDef huart1;
 //static u16 intstop_time =0 ;
 float battery = 12;// 12v The initial state is fully charged 12v
 uint8_t Start_Flag = 0; // Valeur initiale
-int ps2_conut = 0;  // Variable globale initialisée à 0
+//int ps2_conut = 0;  // Variable globale initialisée à 0
 
 
 extern uint8_t mpu_data_ready ;
@@ -22,13 +22,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if(GPIO_Pin == MPU6050_Int_Pin && Stop_Flag == 0)
     {
-    	ps2_conut++;
-    	if(ps2_conut >20){
-    		ps2_conut = 0;
-    		PS2_Control_Car();
+    	 LQR_Balance_Only();
 
-    	}
-
+/*
 	// 1️⃣ Lire l'angle et le gyro
 		Get_Angle(GET_Angle_Way);
 
@@ -68,7 +64,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		}
 
 
-
+*/
     }
 }
 

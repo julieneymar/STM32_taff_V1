@@ -33,8 +33,6 @@ void Motor_start(void);
 #include "ALLHeader.h"
 
 #define PI 3.14159265							// PI π
-#define Control_Frequency  200.0	// Encoder reading frequency
-#define Diameter_67  67.0 				//   Wheel diameter 67mm
 #define EncoderMultiples   4.0 		//  Encoder multiples
 #define Encoder_precision  11.0 	// Encoder precision 11 lines
 #define Reduction_Ratio  30.0			//  Reduction ratio 30

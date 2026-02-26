@@ -36,7 +36,8 @@ Core/Src/KF.o: ../Core/Src/KF.c ../Core/Inc/KF.h ../Core/Inc/ALLHeader.h \
  ../Core/Inc/dmpKey.h ../Core/Inc/dmpmap.h ../Core/Inc/inv_mpu.h \
  ../Core/Inc/inv_mpu_dmp_motion_driver.h ../Core/Inc/KF.h \
  ../Core/Inc/delay.h ../Core/Inc/filtrer.h ../Core/Inc/uart5.h \
- ../Core/Inc/ps2.h ../Core/Inc/app_ps2.h ../Core/Inc/oled.i2c.h
+ ../Core/Inc/ps2.h ../Core/Inc/app_ps2.h ../Core/Inc/oled.i2c.h \
+ ../Core/Inc/app_LQR.h
 ../Core/Inc/KF.h:
 ../Core/Inc/ALLHeader.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -92,3 +93,4 @@ Core/Src/KF.o: ../Core/Src/KF.c ../Core/Inc/KF.h ../Core/Inc/ALLHeader.h \
 ../Core/Inc/ps2.h:
 ../Core/Inc/app_ps2.h:
 ../Core/Inc/oled.i2c.h:
+../Core/Inc/app_LQR.h:

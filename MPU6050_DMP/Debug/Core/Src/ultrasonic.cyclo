@@ -1,5 +1,5 @@
 ../Core/Src/ultrasonic.c:18:6:Ultrasonic_Init	1
 ../Core/Src/ultrasonic.c:36:6:APP_avoid	2
-../Core/Src/ultrasonic.c:56:6:Get_Distane	4
-../Core/Src/ultrasonic.c:94:6:HAL_TIM_PeriodElapsedCallback	5
-../Core/Src/ultrasonic.c:120:6:HAL_TIM_IC_CaptureCallback	5
+../Core/Src/ultrasonic.c:61:6:Get_Distane	2
+../Core/Src/ultrasonic.c:115:6:HAL_TIM_PeriodElapsedCallback	5
+../Core/Src/ultrasonic.c:141:6:HAL_TIM_IC_CaptureCallback	5

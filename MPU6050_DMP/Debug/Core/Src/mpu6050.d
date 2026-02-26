@@ -52,7 +52,8 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/uart5.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/ps2.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/app_ps2.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/oled.i2c.h
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/oled.i2c.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/app_LQR.h
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/mpu6050.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/AllHeader.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -109,3 +110,4 @@ Core/Src/mpu6050.o: ../Core/Src/mpu6050.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/ps2.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/app_ps2.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/oled.i2c.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/../../../../MPU6050_DMP/Core/Inc/app_LQR.h:

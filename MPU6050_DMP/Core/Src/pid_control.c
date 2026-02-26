@@ -71,6 +71,8 @@ int Velocity_PI(int encoder_left,int encoder_right)
     static float velocity,Encoder_Least,Encoder_bias,Movement;
 	  static float Encoder_Integral;
 
+	 // Movement=Move_X;
+
 	    Movement = Car_Target_Velocity;  // ← ICI !
 		Encoder_Least =0-(encoder_left+encoder_right);
 		Encoder_bias *= 0.84;

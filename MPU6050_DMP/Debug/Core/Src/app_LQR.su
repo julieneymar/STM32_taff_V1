@@ -1,0 +1,2 @@
+../Core/Src/app_LQR.c:68:6:LQR_Control	32	static
+../Core/Src/app_LQR.c:167:6:LQR_Balance_Only	32	static

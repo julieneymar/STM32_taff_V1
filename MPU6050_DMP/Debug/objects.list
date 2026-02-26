@@ -1,6 +1,7 @@
 "./Core/Inc/inv_mpu_dmp_motion_driver.o"
 "./Core/Src/KF.o"
 "./Core/Src/adc.o"
+"./Core/Src/app_LQR.o"
 "./Core/Src/app_control.o"
 "./Core/Src/app_ps2.o"
 "./Core/Src/delay.o"
