@@ -243,8 +243,8 @@ int main(void)
      printf(">>> STARTING CONTROL LOOP <<<\r\n");
      Stop_Flag = 0;
      HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET); // LED fixe = ON
-     Car_Target_Velocity = 0.0f;
-     Car_Turn_Amplitude_speed = 0;
+     Car_Target_Velocity = 0;
+     Car_Turn_Amplitude_speed = 6;
      printf(">>> Robot moving forward at velocity %.1f <<<\r\n", Car_Target_Velocity);
 
   while (1)

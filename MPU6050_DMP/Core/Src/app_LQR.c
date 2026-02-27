@@ -91,10 +91,14 @@ void LQR_Balance_Only(void)
 	angle_z += gyro_z / Control_Frequency;
 
 	// ÉQUILIBRE UNIQUEMENT - Pas de mouvement
-	Target_x_speed = 0;      // Vitesse nulle
-	Target_gyro_z = 0;       // Pas de rotation
-	K5 = K5OLD;
-	K6 = K6OLD;
+	//Target_x_speed = 6/10.0f;      // Vitesse nulle
+	//Target_gyro_z = 0;       // Pas de rotation
+	//K5 = K5OLD;
+	//K6 = K6OLD;
+	Target_x_speed =  0; // Car_Target_Velocity / 10.0f;  // Conversion
+	x_pose = 0;  // Reset position pour vitesse constante
+	Target_gyro_z = -( Car_Turn_Amplitude_speed / 3.0f);  // Rotation
+	angle_z = 0;
 
 	//  Calculer les accélérations (contrôleur LQR)
 	L_accel = -(K1 * x_pose +
@@ -126,4 +130,38 @@ void LQR_Balance_Only(void)
 	{
 		Set_Pwm(Motor_Left, Motor_Right);
 	}
+}
+
+
+
+void Dif_mouvement (){
+	 // ---------------Avant-------------
+
+	        Target_x_speed = Car_Target_Velocity / 10.0f;  // Conversion
+	        x_pose = 0;  // Reset position pour vitesse constante
+	        Target_gyro_z = Car_Turn_Amplitude_speed / 3.0f;  // Rotation
+	        angle_z = 0;
+
+	     //-------------- Arrière-----------
+
+	        Target_x_speed = Car_Target_Velocity / 10.0f;
+	        x_pose = 0;
+	        Target_gyro_z = Car_Turn_Amplitude_speed / 3.0f;
+	        angle_z = 0;
+
+	    //-------- Rotation sur place------------------
+
+	        Target_x_speed = 0;
+	        Target_gyro_z = Car_Turn_Amplitude_speed / 3.0f;
+	        angle_z = 0;
+	        K5 = 22.3607;  // Gains augmentés pour rotation
+	        K6 = 22.3607;
+
+	      // -------------Arrêt-----------
+
+	        Target_x_speed = 0;
+	        Target_gyro_z = 0;
+	        K5 = K5OLD;
+	        K6 = K6OLD;
+
 }
