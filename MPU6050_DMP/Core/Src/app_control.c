@@ -17,14 +17,54 @@ uint8_t Start_Flag = 0; // Valeur initiale
 
 
 extern uint8_t mpu_data_ready ;
+float distance_cm;
+
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+
+
     if(GPIO_Pin == MPU6050_Int_Pin && Stop_Flag == 0)
     {
-    	 LQR_Balance_Only();
 
-/*
+		static uint16_t ultrasonic_counter = 0;
+
+		// Mesurer distance toutes les 10 interruptions = 50ms
+		ultrasonic_counter++;
+		if(ultrasonic_counter >= 10)  // 10 × 5ms = 50ms
+		{
+			ultrasonic_counter = 0;
+
+			// Déclencher mesure
+			TRIG_SIG = 1;
+			delay_us(15);
+			TRIG_SIG = 0;
+
+			// Lire résultat si disponible
+			if(TIM2CH2_CAPTURE_STA & 0x80)
+			{
+				g_distance = (TIM2CH2_CAPTURE_STA & 0x3F) * 65536 + TIM2CH2_CAPTURE_VAL;
+				g_distance = g_distance * 170 / 1000;  // mm
+				TIM2CH2_CAPTURE_STA = 0;
+			}
+		}
+
+		 distance_cm = g_distance / 10.0f;
+
+		if( distance_cm < 2.0f)
+		{
+			Car_Target_Velocity = -6.0f;
+			Car_Turn_Amplitude_speed = 15.0f;
+		}
+		else
+		{
+			Car_Target_Velocity = 6.0f;
+			Car_Turn_Amplitude_speed = 0;
+		}
+
+    	// LQR_Balance_Only();
+
+
 	// 1️⃣ Lire l'angle et le gyro
 		Get_Angle(GET_Angle_Way);
 
@@ -64,7 +104,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		}
 
 
-*/
+
     }
 }
 
@@ -137,7 +177,7 @@ void Read_MPU6050_Burst(float *gyro_x, float *gyro_y, float *gyro_z,
     // Au lieu de 12 appels I2C_ReadOneByte() → gain de ~1000µs !
     IICreadBytes(devAddr, MPU6050_RA_ACCEL_XOUT_H, 14, buffer);
 
-    // Parsing des données (même méthode qu'avant)
+    // Parsing des données
     Accel_X = (buffer[0] << 8) | buffer[1];
     Accel_Y = (buffer[2] << 8) | buffer[3];
     Accel_Z = (buffer[4] << 8) | buffer[5];
@@ -146,7 +186,7 @@ void Read_MPU6050_Burst(float *gyro_x, float *gyro_y, float *gyro_z,
     Gyro_Y = (buffer[10] << 8) | buffer[11];
     Gyro_Z = (buffer[12] << 8) | buffer[13];
 
-    // Conversion signée (exactement comme avant)
+    // Conversion signée
     if(Gyro_X > 32768)  Gyro_X -= 65536;
     if(Gyro_Y > 32768)  Gyro_Y -= 65536;
     if(Gyro_Z > 32768)  Gyro_Z -= 65536;
@@ -154,7 +194,7 @@ void Read_MPU6050_Burst(float *gyro_x, float *gyro_y, float *gyro_z,
     if(Accel_Y > 32768) Accel_Y -= 65536;
     if(Accel_Z > 32768) Accel_Z -= 65536;
 
-    // Conversion en unités physiques (mêmes facteurs qu'avant)
+    // Conversion en unités physiques
     *accel_x = Accel_X / 1671.84f;
     *accel_y = Accel_Y / 1671.84f;
     *accel_z = Accel_Z / 1671.84f;

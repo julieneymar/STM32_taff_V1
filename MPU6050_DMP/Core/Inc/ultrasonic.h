@@ -24,7 +24,9 @@ extern volatile uint32_t g_distance;
 
 void Ultrasonic_Init(void);
 void distance(void);
-void APP_avoid(void);
+//void APP_avoid(void);
+void APP_avoid();
+
 
 void Get_Distane(void);
 

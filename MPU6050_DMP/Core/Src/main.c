@@ -244,19 +244,14 @@ int main(void)
      Stop_Flag = 0;
      HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET); // LED fixe = ON
      Car_Target_Velocity = 0;
-     Car_Turn_Amplitude_speed = 6;
+     Car_Turn_Amplitude_speed = 0;
      printf(">>> Robot moving forward at velocity %.1f <<<\r\n", Car_Target_Velocity);
-
   while (1)
   {
-	 // Get_Distane();
-	 // APP_avoid();// Obstacle avoidance
 
-
-	 // printf("dis = %ld mm \n", g_distance);
 	  //OLED_Draw_Line(showbuf, 2, false, true);
 	  //sprintf(showbuf,"dis = %ld mm  ",g_distance);
-	  HAL_Delay(15);
+	  //HAL_Delay(20);
 
 
 

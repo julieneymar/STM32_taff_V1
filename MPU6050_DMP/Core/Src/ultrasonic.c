@@ -29,13 +29,11 @@ void Ultrasonic_Init(void)
     printf("[INFO] Ultrasonic sensor initialized (TIM2 CH2)\r\n");
 }
 
-/**
- * @brief Obtenir la distance mesurée - VERSION SIMPLIFIÉE
- */
 
-void APP_avoid(void)
+
+void APP_avoid()
 {
-	if(g_distance<14)
+	if(g_distance < 20)
 	{
 		/*
 			Move_X = -6;
@@ -44,15 +42,20 @@ void APP_avoid(void)
 			Move_X = 0;
 			Move_Z = 6;
 			delay_us(2); */
-		Car_Target_Velocity = -6.0f;   // Reculer
-	    Car_Turn_Amplitude_speed = 6.0f; // Tourner
+		 Car_Target_Velocity = 0;
+		 Car_Turn_Amplitude_speed = 2.0f;
+		 //printf("tourner dis = %ld mm \n", g_distance);
+
 	}
 	else
 	{
+
 			//Move_X = 6;
 			//Move_Z = 0;
-		 Car_Target_Velocity = 6.0f;    // Avancer
-		  Car_Turn_Amplitude_speed = 0;
+		Car_Target_Velocity = 2.0f;    // Avancer
+		Car_Turn_Amplitude_speed = 0;
+		//printf(" avancer dis = %ld mm \n", g_distance);
+
 	}
 
 
@@ -63,51 +66,17 @@ void Get_Distane(void)
 	 TRIG_SIG = 1;
 	 delay_us(15);
 	 TRIG_SIG = 0;
-	 if(TIM2CH2_CAPTURE_STA&0X80)//�ɹ�������һ�θߵ�ƽ //Successfully captured a high level once
+	 if(TIM2CH2_CAPTURE_STA&0X80) //Successfully captured a high level once
 	 {
 		 g_distance=TIM2CH2_CAPTURE_STA&0X3F;
-		 g_distance*=65536;					        //���ʱ���ܺ� Overflow time sum
-		 g_distance+=TIM2CH2_CAPTURE_VAL;		//�õ��ܵĸߵ�ƽʱ�� Get the total high level time
-		 g_distance=g_distance*170/1000;      //ʱ��*����/2�����أ� һ������0.001ms  Time * speed of sound/2 (round trip), one count 0.001ms
-		 TIM2CH2_CAPTURE_STA=0;			//������һ�β��� Start the next capture
+		 g_distance*=65536;					        // Overflow time sum
+		 g_distance+=TIM2CH2_CAPTURE_VAL;		//Get the total high level time
+		 g_distance=g_distance*170/1000;      //  Time * speed of sound/2 (round trip), one count 0.001ms
+		 TIM2CH2_CAPTURE_STA=0;			//Start the next capture
 	 }
+
 }
-/*
-void Get_Distane(void)
-{
-    // Reset des flags avant la mesure
-    TIM2CH2_CAPTURE_STA = 0;
-    TIM2CH2_CAPTURE_VAL = 0;
 
-    // Envoyer une impulsion TRIG de 15µs
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
-    delay_us(15);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
-
-    // Attendre la fin de la capture (max 60ms pour HC-SR04)
-    uint32_t start_tick = HAL_GetTick();
-    while (!(TIM2CH2_CAPTURE_STA & 0x80))
-    {
-        if ((HAL_GetTick() - start_tick) > 60)  // Timeout 60ms
-        {
-            g_distance = 0;  // Hors de portée
-            TIM2CH2_CAPTURE_STA = 0;
-            return;
-        }
-    }
-
-    // Calcul de la distance
-    uint32_t capture_time = (TIM2CH2_CAPTURE_STA & 0x3F);
-    capture_time = capture_time * 65536 + TIM2CH2_CAPTURE_VAL;
-    g_distance = (capture_time * 170) / 1000;  // Distance en mm
-
-    // Limiter la distance max à 4000mm (4m)
-    if (g_distance > 4000)
-    {
-        g_distance = 0;
-    }
-}
-*/
 
 /**
  * @brief Callback interruption débordement
@@ -168,37 +137,4 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
         }
     }
 }
-/*
-void Get_Distane(void)
-{
-    TIM2CH2_CAPTURE_STA = 0;
-    TIM2CH2_CAPTURE_VAL = 0;
 
-    // TRIG
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
-    delay_us(15);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
-
-    printf("[DEBUG] Waiting for echo...\r\n");
-
-    uint32_t start_tick = HAL_GetTick();
-    while (!(TIM2CH2_CAPTURE_STA & 0x80))
-    {
-        if ((HAL_GetTick() - start_tick) > 60)
-        {
-            printf("[DEBUG] TIMEOUT! STA=0x%02X\r\n", TIM2CH2_CAPTURE_STA);
-            g_distance = 0;
-            TIM2CH2_CAPTURE_STA = 0;
-            return;
-        }
-    }
-
-    printf("[DEBUG] Captured! STA=0x%02X, VAL=%u\r\n",
-           TIM2CH2_CAPTURE_STA, TIM2CH2_CAPTURE_VAL);
-
-    uint32_t capture_time = (TIM2CH2_CAPTURE_STA & 0x3F) * 65536 + TIM2CH2_CAPTURE_VAL;
-    g_distance = (capture_time * 170) / 1000;
-
-    printf("[DEBUG] Time=%lu µs, Distance=%lu mm\r\n", capture_time, g_distance);
-}
-*/
